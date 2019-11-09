@@ -15,14 +15,14 @@ class App extends React.Component {
   }
 
   onFormSubmit = item => {
-    const { state } = this.state;
-    this.setState({ items: state.items.concat(item) });
+    const { items } = this.state;
+    this.setState({ items: items.concat(item) });
   };
 
   onButtonClick = index => {
-    const { state } = this.state;
+    const { items } = this.state;
     this.setState({
-      items: state.items.filter((el, i) => {
+      items: items.filter((el, i) => {
         return i !== index;
       })
     });
