@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.Body {
+  background-color: #e8eaed;
+}
+
+.m-buttonReset {
+  background: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  padding: 0;
+  &:hover,
+  &:active,
+  &:focus {
+    background: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+button.btn-primary,
+button.btn-primary:not(:disabled):not(.disabled).active,
+button.btn-primary:not(:disabled):not(.disabled):active,
+.show > button.btn-primary.dropdown-toggle {
+  background-color: #b9b1b1;
+  border: 1px solid #b9b1b1;
+  box-shadow: none;
+  &:hover,
+  &:active,
+  &:focus {
+    background: #9e9898;
+    border: 1px solid #b9b1b1;
+    outline: none;
+    box-shadow: none;
+  }
+}
