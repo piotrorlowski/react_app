@@ -34,13 +34,19 @@ class AppList extends React.Component {
       </li>
     ));
     const interactions = itemInteractions.map(element => (
-      <div key={element.toString()}>{element}</div>
+      <li className="AppList-element" key={element.toString()}>
+        {element}
+      </li>
     ));
 
     return (
       <div>
         <ul className="AppList">{listItems}</ul>
-        {isLoading ? <Spinner animation="grow" /> : <div>{interactions}</div>}
+        {isLoading ? (
+          <Spinner className="AppList-spinner" animation="grow" />
+        ) : (
+          <ul className="AppList">{interactions}</ul>
+        )}
       </div>
     );
   }
