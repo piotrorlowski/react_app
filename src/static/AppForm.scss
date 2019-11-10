@@ -1,2 +1,7 @@
 .AppForm {
 }
+
+.form-control:focus {
+  border-color: #D0E9E8;
+  box-shadow: 0 0 0 0.2rem rgba(208, 233, 232, 0.25);
+}

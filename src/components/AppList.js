@@ -32,13 +32,21 @@ class AppList extends React.Component {
         </button>
       </li>
     ));
+    // const listItemsDescriptions = itemsDescriptions.map((element) => (
+    //   <div key={element.toString()}>{element}</div>
+    // ));
 
-    return <ul className="AppList">{listItems}</ul>;
+    return (
+      <div>
+        <ul className="AppList">{listItems}</ul>
+      </div>
+    );
   }
 }
 
 AppList.propTypes = {
   items: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string])).isRequired,
+  // itemsDescriptions: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string])).isRequired,
   onButtonClick: PropTypes.func.isRequired
 };
 

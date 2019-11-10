@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "../static/AppForm.scss";
-import { Form, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 class AppForm extends React.Component {
   constructor(props) {
@@ -38,18 +38,15 @@ class AppForm extends React.Component {
     return (
       <Form onSubmit={this.handleSubmit} className="AppForm">
         <Form.Group controlId="exampleForm.ControlInput1">
-          <Form.Label>Element name</Form.Label>
+          <Form.Label>Drug name</Form.Label>
           <Form.Control
             value={item}
             onChange={this.handleChange}
             type="text"
-            placeholder="Element name"
+            placeholder="Type drug name and hit enter"
           />
         </Form.Group>
         <p className="text-danger">{isElementListed ? "This element is listed already." : ""}</p>
-        <Button variant="primary" type="submit">
-          Add element
-        </Button>
       </Form>
     );
   }

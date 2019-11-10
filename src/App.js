@@ -4,19 +4,31 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import AppForm from "./components/AppForm";
 import AppList from "./components/AppList";
 
+const axios = require("axios");
+
 const itemList = [];
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: itemList
+      items: itemList,
+      itemsDescriptions: []
     };
   }
+
+  getDataAxios = async () => {
+    const response = await axios.get("https://rxnav.nlm.nih.gov/REST/rxcui?name=lipitor");
+    const { itemsDescriptions } = this.state;
+    this.setState({ itemsDescriptions: itemsDescriptions.concat(response.data) });
+    console.log(itemsDescriptions);
+    console.log(response.data);
+  };
 
   onFormSubmit = item => {
     const { items } = this.state;
     this.setState({ items: items.concat(item) });
+    this.getDataAxios();
   };
 
   onButtonClick = index => {
@@ -29,14 +41,18 @@ class App extends React.Component {
   };
 
   render = () => {
-    const { items } = this.state;
+    const { items, itemsDescriptions } = this.state;
     return (
       <div className="App">
-        <h1 className="App-heading">App</h1>
+        <h1 className="App-heading">DrugInteractions.eu</h1>
         <div className="App-card">
           <AppForm items={items} onSubmit={this.onFormSubmit} />
           <hr />
-          <AppList items={items} onButtonClick={this.onButtonClick} />
+          <AppList
+            items={items}
+            itemsDescriptions={itemsDescriptions}
+            onButtonClick={this.onButtonClick}
+          />
         </div>
       </div>
     );
