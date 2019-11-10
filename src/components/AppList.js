@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "../static/AppList.scss";
+import { Spinner } from "react-bootstrap";
 
 class AppList extends React.Component {
   handleClick = e => {
@@ -10,7 +11,7 @@ class AppList extends React.Component {
   };
 
   render() {
-    const { items } = this.props;
+    const { items, itemInteractions, isLoading } = this.props;
     const listItems = items.map((element, index) => (
       <li id={index} key={element.toString()} className="AppList-element">
         <span className="AppList-elementName">{element}</span>
@@ -32,21 +33,23 @@ class AppList extends React.Component {
         </button>
       </li>
     ));
-    // const listItemsDescriptions = itemsDescriptions.map((element) => (
-    //   <div key={element.toString()}>{element}</div>
-    // ));
+    const interactions = itemInteractions.map(element => (
+      <div key={element.toString()}>{element}</div>
+    ));
 
     return (
       <div>
         <ul className="AppList">{listItems}</ul>
+        {isLoading ? <Spinner animation="grow" /> : <div>{interactions}</div>}
       </div>
     );
   }
 }
 
 AppList.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
   items: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string])).isRequired,
-  // itemsDescriptions: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string])).isRequired,
+  itemInteractions: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string])).isRequired,
   onButtonClick: PropTypes.func.isRequired
 };
 

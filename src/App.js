@@ -13,22 +13,59 @@ class App extends React.Component {
     super(props);
     this.state = {
       items: itemList,
-      itemsDescriptions: []
+      itemInteractions: [],
+      isLoading: false
     };
   }
 
-  getDataAxios = async () => {
-    const response = await axios.get("https://rxnav.nlm.nih.gov/REST/rxcui?name=lipitor");
-    const { itemsDescriptions } = this.state;
-    this.setState({ itemsDescriptions: itemsDescriptions.concat(response.data) });
-    console.log(itemsDescriptions);
-    console.log(response.data);
+  getItemNormId = async itemName => {
+    const response = await axios.get(`https://rxnav.nlm.nih.gov/REST/rxcui?name=${itemName}`);
+    const prop = "idGroup";
+    const { [prop]: item } = response.data;
+    if (item && item.rxnormId) {
+      return item.rxnormId[0];
+    }
+    return null;
   };
 
-  onFormSubmit = item => {
-    const { items } = this.state;
-    this.setState({ items: items.concat(item) });
-    this.getDataAxios();
+  getItemInteraction = async normId => {
+    const response = await axios.get(
+      `https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=${normId}`
+    );
+    if (
+      response.data &&
+      response.data.interactionTypeGroup &&
+      response.data.interactionTypeGroup[0].interactionType
+    ) {
+      const interactions = [
+        ...new Set(
+          response.data.interactionTypeGroup[0].interactionType[0].interactionPair.map(element => {
+            return element.description;
+          })
+        )
+      ];
+      return interactions;
+    }
+    return ["Not found"];
+  };
+
+  onFormSubmit = async item => {
+    this.setState({ isLoading: true, items: [], itemInteractions: [] });
+    const itemNormId = await this.getItemNormId(item);
+    if (itemNormId) {
+      const interactions = await this.getItemInteraction(itemNormId);
+      this.setState({
+        items: [item],
+        itemInteractions: interactions,
+        isLoading: false
+      });
+    } else {
+      this.setState({
+        items: [],
+        itemInteractions: ["Wrong drug name"],
+        isLoading: false
+      });
+    }
   };
 
   onButtonClick = index => {
@@ -36,21 +73,24 @@ class App extends React.Component {
     this.setState({
       items: items.filter((el, i) => {
         return i !== index;
-      })
+      }),
+      itemInteractions: []
     });
   };
 
   render = () => {
-    const { items, itemsDescriptions } = this.state;
+    const { items, itemInteractions, isLoading } = this.state;
+    const heading = "DRUG INTERACTIONS";
     return (
       <div className="App">
-        <h1 className="App-heading">DrugInteractions.eu</h1>
+        <h1 className="App-heading">{heading}</h1>
         <div className="App-card">
           <AppForm items={items} onSubmit={this.onFormSubmit} />
           <hr />
           <AppList
+            isLoading={isLoading}
             items={items}
-            itemsDescriptions={itemsDescriptions}
+            itemInteractions={itemInteractions}
             onButtonClick={this.onButtonClick}
           />
         </div>
