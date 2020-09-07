@@ -80,7 +80,7 @@ class App extends React.Component {
 
   render = () => {
     const { items, itemInteractions, isLoading } = this.state;
-    const heading = "DRUG INTERACTIONS";
+    const heading = "Drug Interactions";
     return (
       <div className="App">
         <h1 className="App-heading">{heading}</h1>
