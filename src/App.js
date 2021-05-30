@@ -30,7 +30,7 @@ class App extends React.Component {
 
   getItemInteraction = async normId => {
     const response = await axios.get(
-      `https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=${normId}`
+      `https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=${normId}&sources=DrugBank`
     );
     if (
       response.data &&
@@ -39,9 +39,9 @@ class App extends React.Component {
     ) {
       const interactions = [
         ...new Set(
-          response.data.interactionTypeGroup[0].interactionType[0].interactionPair.map(element => {
-            return element.description;
-          })
+          response.data.interactionTypeGroup[0].interactionType[0].interactionPair.map(
+            element => element.description
+          )
         )
       ];
       return interactions;
@@ -71,9 +71,7 @@ class App extends React.Component {
   onButtonClick = index => {
     const { items } = this.state;
     this.setState({
-      items: items.filter((el, i) => {
-        return i !== index;
-      }),
+      items: items.filter((el, i) => i !== index),
       itemInteractions: []
     });
   };

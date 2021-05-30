@@ -3,22 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.19.0",
-    "bootstrap": "4.3.1",
-    "husky": "3.0.9",
-    "i18next": "^19.0.0",
-    "jquery": "1.9.1",
-    "lint-staged": "9.4.2",
-    "material-design-icons": "3.0.1",
-    "node-sass": "4.13.0",
-    "popper.js": "^1.14.7",
-    "prop-types": "15.7.2",
-    "react": "^16.11.0",
-    "react-bootstrap": "1.0.0-beta.14",
-    "react-dom": "^16.11.0",
-    "react-i18next": "^11.1.0",
-    "react-scripts": "3.2.0",
-    "typescript": "^2.8.0"
+    "axios": "^0.21.1",
+    "bootstrap": "^5.0.1",
+    "husky": "^6.0.0",
+    "i18next": "^20.3.1",
+    "jquery": "^3.6.0",
+    "lint-staged": "^11.0.0",
+    "material-design-icons": "^3.0.1",
+    "node-sass": "^6.0.0",
+    "popper.js": "^1.16.1",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.2",
+    "react-bootstrap": "^1.6.0",
+    "react-dom": "^17.0.2",
+    "react-i18next": "^11.10.0",
+    "react-scripts": "^4.0.3",
+    "typescript": "^4.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -42,16 +42,17 @@
     ]
   },
   "devDependencies": {
-    "babel-eslint": "10.0.3",
-    "eslint": "6.6.0",
-    "eslint-config-airbnb": "18.0.1",
-    "eslint-config-prettier": "6.5.0",
-    "eslint-plugin-import": "2.18.2",
-    "eslint-plugin-jsx-a11y": "6.2.3",
-    "eslint-plugin-react": "7.16.0",
-    "eslint-plugin-react-hooks": "1.7.0",
-    "prettier": "1.19.1",
-    "pretty-quick": "2.0.1"
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.27.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "^2.3.0",
+    "pretty-quick": "^3.1.0",
+    "yarn-upgrade-all": "^0.5.4"
   },
   "husky": {
     "hooks": {
@@ -64,5 +65,8 @@
       "pretty-quick — staged",
       "git add"
     ]
-  }
+  },
+  "eslintIgnore": [
+    "serviceWorker.js"
+  ]
 }

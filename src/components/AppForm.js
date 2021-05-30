@@ -15,9 +15,7 @@ class AppForm extends React.Component {
   handleSubmit = e => {
     const { item, isElementListed } = this.state;
     const { items, onSubmit } = this.props;
-    const checkIfElementIsListed = element => {
-      return element === item;
-    };
+    const checkIfElementIsListed = element => element === item;
 
     this.setState({ isElementListed: items.some(checkIfElementIsListed) });
 
